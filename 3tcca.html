@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<head>
+    <title>CCA History</title>
+    <link rel="stylesheet" href="3tccastyles.css">
+</head>
+
+<body>
+    <div class="header">
+        <img src="banner.png" class="banner-img">
+        <div class="header-text">CCA History</div>
+    </div>
+
+    <div class="text">
+        <p>
+            The Carry Cancel Adder (CCA) is an adder circuit used in Computational Redstone which uses generate-kill
+             signals instead of generate-propogate. It was created over a decade ago and has cemented itself as the
+             most used adder in computational redstone because of its speed, size, and synchronous output.
+             But who made it? why is it so good? And what are the current inovations? This page will answer
+             all of those questions and more.
+            <br><br>
+            The CCA was created by a user named 'MagicalGentleman', or simply just 'Magic', although now known as 'moppu' in
+             September 2014. It was orignally 5 redstone ticks (5t) and 6x11 blocks long. here is Magics explanation of the adder:
+
+            <blockquote>
+                The adder is comprised of 3 stages:
+                <br><br>
+                In stage 1, the adder performs XOR, AND, and NOR.
+                XOR is pretty straightforward. It's just the sum without the carry.
+                AND is the Generate signal G.
+                NOR is the Carry Cancel signal CC.
+                <br><br>
+                In stage 2, the G and CC signals are sent to two separate slab stacks. The G signal goes to a slab stack that
+                connects to the base input of every comparator in the CCA carry tower. The CC signal goes to a slab stack that
+                connects to the side input of every carry tower comparator.
+                <br><br>
+                When these signals hit the slab stacks, you need to provide full power (15 signal strength). The carry
+                calculation works in ratios of signal strength so make sure that your input strengths are all the same!
+                Also keep in mind that these slab stacks are supposed to 'bleed upwards' to the other comparators, that's
+                the core of how this system works.
+                <br><br>
+                The two slab stacks are used by a comparator at each level to calculate whether there is a valid carry.
+                The G signal is what is passed through the comparator, and the CC signal is what goes into the side for comparison.
+                If the signal strength read from the CC stack is higher than the signal strength from G, the carry is 'cancelled'.
+                <br><br>
+                This works because a physically higher CC will always have a higher signal strength than a G signal from below.
+                The same goes for if G is stronger than CC, it can only mean that G happened at least 1 level higher than CC. This
+                would force signal out of the comparator as the CC signal can't subtract it all. This comparator's output would
+                signify that a carry happened, and needs to be XORed in stage 3.
+                <br><br>
+                In stage 3, the output of the comparators of stage 2 are fed into a final XOR with the first XOR result from
+                stage 1. The output of this XOR is the final result.
+                <br><br>
+                In summary:<br>
+                Stage 1: xor, and, nor. (2 ticks)<br>
+                Stage 2: carry calculations. (1 tick)<br>
+                Stage 3: final xor. (2 ticks) (This can be 1 tick with a special type of XOR I designed)
+
+            </blockquote>
+
+            This adder was also, incredibly, made independently by a user named 'yap7' a few months after Magics first creation.
+             Whilst he wasnt the first creator, as Magic also says, he should have just as much credit for its creation.
+            <br><br>
+            The CCA was revolutionary because its carry calculation logic was much smaller that other adders at the time
+             such as CLE or CLA and it was one of the first actualy good vertical adders which made vertical redstone much more
+             feasible. However the CCA would not catch on just yet - The adder stood at 5t while the PLA and CLEs of this time
+             had reached speeds of 3t, making the CCA currently not good enough to use competitively. However, over the next
+             few years, the CCA would overcome all boundries and become the most widely used adder today.
+        </p>
+    </div>
+    <img src="magic5tcca.png">
+    <br>
+    <a class="video" href="https://www.youtube.com/watch?v=FrWNrTTcdXg">Magic's CCA</a>
+
+    <div class="text">
+        <p>
+            Some new Optimisations:
+            <ul>
+                <li>In late January of 2015, Magic made the 5t CCA 4-wide, and found out he could use XNOR for generate
+                    instead of AND which made the adder simpler.</li>
+                <li>At the end of January, he made the adder 4t using a special XOR although having
+                    low Signal Strength (SS) out</li>
+                <li>In February, Magic and 'Embizone' created a 4-wide, 4t CCA with low SS output</li>
+                <li>In late February/ Early March - Magic created a 5-wide 4t CCA with min 4SS output</li>
+            </ul>
+            <img src="magic4widecca.png"><br>
+            <img src="magic4tcca.png"><br>
+            By August 2015, the idea of a 3t CCA starts popping up, First from Yap7 who suggests a
+             faux 4t ALU using a 4t CCA by reading both A and B from registers as well as !A and !B, then muxing between
+             these which gives the perception of 1t inverters and a 3t CCA although it uses a 4t CCA.
+
+            In January 2016, 'LambdaPi' noticed that the main issue with the CCA was that XNOR takes 2t to calculate.
+             inverting one of the inputs will turn the XNOR into XOR which can be calculated in 1t, the NOR then becomes
+             NIMPLIES which can also be calculated in 1t. This adder with inverted input was 3t, however because of SS,
+             it was only 4 bits.
+            <img src="lambda3tcca.png">
+            In July 2016, Embizone created a 3t CCA with inverted output (they gave no more information on forums)
+            In February 2016, 'CrazyPyroEagle' made a 3t CCA using comparator priming
+            In August 2017, 'Zijkhal' made a 2t CCA using comparator priming with Koyarnos/alex_you/Nikkeru_ 3t CCA.
+        </p>
+    </div>
+
+
+
+    
+    <a href="https://openredstone.org/">Join ORE!</a>
+</body>
+
+</html>
